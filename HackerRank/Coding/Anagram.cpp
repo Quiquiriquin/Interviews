@@ -23,23 +23,17 @@
 
 using namespace std;
 
+
 int number_needed(string a, string b) {
-    int size;
-    int size1 = a.size(),size2 = b.size();
-    if(a > b)
-        size = size1;
-    if(b > a)
-        size = size2;
-    if(b == a)
-        size = size1;
-    vector <int> pos;
-    for(int i = 0; i < size;i++){
-        if(a[i] == b[i])
-            pos.push_back(i);
-    }
-    int number;
-    number = (size1 - pos.size()) + (size2 - pos.size());
-    return number;
+    // count is the var to save the value of the repeated letters
+    auto count = 0;
+    //vector freq has the size of the alphabet, all values of the vector are in 0
+    vector<int> freq(26, 0);
+    
+    for (auto c : a) { ++freq[c - 'a']; }
+    for (auto c : b) { --freq[c - 'a']; }
+    for (auto val : freq) { count += abs(val); }
+    return count;
 }
 
 int main(){
